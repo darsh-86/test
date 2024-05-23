@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment  
+metadata:
+  name: studentdb
+spec: 
+  replicas: 2
+  selector:
+    matchLabels:
+      app: studentdb
+  strategy: 
+    type: RollingUpdate 
+  template: 
+    metadata: 
+      labels:
+        app: studentdb
+    spec:
+      containers:
+      - name: studentdb 
+        image: darsh8699/studentdb:mysql23 # replace it with your docker image repo and tag 
+        ports:
+        - name: mysql
+          containerPort: 3306   # make sure same port is exposed in Dockerfile (if doesn't exposed any port so you can use any available port)
+          protocol: TCP
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: password
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: username 

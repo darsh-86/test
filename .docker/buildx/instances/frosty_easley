@@ -1,0 +1,1 @@
+{"Name":"frosty_easley","Driver":"docker-container","Nodes":[{"Name":"frosty_easley0","Endpoint":"unix:///var/run/docker.sock","Platforms":null,"Flags":null,"DriverOpts":null,"Files":null}],"Dynamic":false}
